@@ -32,10 +32,10 @@ const Index = () => {
   const { t } = useLanguage();
 
   const stats = [
-    { value: "1M+", label: t("stat.hectares") },
+    { value: "5K+", label: t("stat.hectares") },
     { value: "24/7", label: t("stat.realtime") },
-    { value: "50+", label: t("stat.sources") },
-    { value: "10K+", label: t("stat.users") },
+    { value: "12+", label: t("stat.sources") },
+    { value: "150+", label: t("stat.users") },
   ];
 
   return (
