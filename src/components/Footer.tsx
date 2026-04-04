@@ -51,7 +51,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground transition-colors mt-1"
               >
-                <Facebook size={14} className="shrink-0" />
+                <ExternalLink size={14} className="shrink-0" />
                 <span>{t("footer.followus")}</span>
               </a>
             </div>
