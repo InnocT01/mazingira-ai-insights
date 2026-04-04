@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Mail, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, ExternalLink } from "lucide-react";
 import logo from "@/assets/logo_mazingira.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 
