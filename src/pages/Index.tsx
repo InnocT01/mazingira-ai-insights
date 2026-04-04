@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Satellite, Brain, Database, Shield, Globe, Leaf, BarChart3, MessageSquare } from "lucide-react";
+import { ArrowRight, Satellite, Brain, Database, Shield, Globe, Leaf, BarChart3, MessageSquare, AlertTriangle, FileText, History, ScanLine, CloudRain, Sprout, Users, Droplets, Map, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg-mazingira.png";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -26,16 +26,26 @@ const features = [
   { icon: BarChart3, titleKey: "Predictive Insights", description: "Yield forecasting, climate risk scoring, and trend analysis for informed decision-making." },
   { icon: Database, titleKey: "Open Data Access", description: "Downloadable datasets via CSV and API. Democratizing environmental intelligence across Africa." },
   { icon: Shield, titleKey: "Premium Analytics", description: "AI-driven personalized reports, soil health analysis, and crop performance monitoring." },
+  { icon: AlertTriangle, titleKey: "Climate Alerts", description: "Real-time drought, flood, and frost notifications to protect farmers' crops and livelihoods." },
+  { icon: FileText, titleKey: "PDF Reports", description: "Generate downloadable soil analysis and climate reports with AI-powered insights." },
+  { icon: History, titleKey: "Satellite History", description: "Compare NDVI, rainfall, and vegetation across multiple seasons and years." },
+  { icon: ScanLine, titleKey: "Soil & Seed Scanner", description: "Analyze soil samples and seeds for nutrient profiles and optimal planting recommendations." },
+  { icon: CloudRain, titleKey: "Weather Forecasting", description: "Hyperlocal 7-day weather predictions tailored for agricultural planning in DRC." },
+  { icon: Sprout, titleKey: "Crop Calendar", description: "AI-generated planting and harvesting schedules based on local climate and soil conditions." },
+  { icon: Users, titleKey: "Farmer Community", description: "Connect with local farmers, share best practices, and access cooperative market opportunities." },
+  { icon: Droplets, titleKey: "Irrigation Advisor", description: "Smart irrigation recommendations based on soil moisture, weather forecasts, and crop needs." },
+  { icon: Map, titleKey: "Land Mapping", description: "GPS-based land boundary mapping and parcel management for smallholder farmers." },
+  { icon: TrendingUp, titleKey: "Carbon Credits", description: "Track carbon sequestration from regenerative practices and access carbon credit markets." },
 ];
 
 const Index = () => {
   const { t } = useLanguage();
 
   const stats = [
-    { value: "1M+", label: t("stat.hectares") },
+    { value: "5K+", label: t("stat.hectares") },
     { value: "24/7", label: t("stat.realtime") },
-    { value: "50+", label: t("stat.sources") },
-    { value: "10K+", label: t("stat.users") },
+    { value: "12+", label: t("stat.sources") },
+    { value: "150+", label: t("stat.users") },
   ];
 
   return (
