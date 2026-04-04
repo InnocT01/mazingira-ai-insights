@@ -1,21 +1,26 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo_mazingira.png";
-
-const navLinks = [
-  { to: "/", label: "Home" },
-  { to: "/dashboard", label: "Open Data" },
-  { to: "/explorer", label: "Explorer" },
-  { to: "/ai", label: "AI Assistant" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-];
+import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
+  const { lang, setLang, t } = useLanguage();
+
+  const navLinks = [
+    { to: "/", label: t("nav.home") },
+    { to: "/dashboard", label: t("nav.opendata") },
+    { to: "/explorer", label: t("nav.explorer") },
+    { to: "/ai", label: t("nav.ai") },
+    { to: "/about", label: t("nav.about") },
+    { to: "/contact", label: t("nav.contact") },
+    ...(user ? [{ to: "/premium", label: t("nav.premium") }] : []),
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border">
@@ -41,12 +46,32 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/login"
-            className="ml-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+
+          {/* Language Toggle */}
+          <button
+            onClick={() => setLang(lang === "en" ? "fr" : "en")}
+            className="ml-1 px-2 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex items-center gap-1"
+            title={lang === "en" ? "Passer en français" : "Switch to English"}
           >
-            Sign In
-          </Link>
+            <Globe size={16} />
+            {lang === "en" ? "FR" : "EN"}
+          </button>
+
+          {user ? (
+            <button
+              onClick={() => signOut()}
+              className="ml-2 px-4 py-2 rounded-lg bg-muted text-foreground text-sm font-semibold hover:bg-muted/80 transition-colors"
+            >
+              {t("nav.signout")}
+            </button>
+          ) : (
+            <Link
+              to="/login"
+              className="ml-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:opacity-90 transition-opacity"
+            >
+              {t("nav.signin")}
+            </Link>
+          )}
         </div>
 
         <button
@@ -80,13 +105,31 @@ const Navbar = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link
-                to="/login"
-                onClick={() => setOpen(false)}
-                className="mt-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold text-center"
+
+              <button
+                onClick={() => { setLang(lang === "en" ? "fr" : "en"); }}
+                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground flex items-center gap-1"
               >
-                Sign In
-              </Link>
+                <Globe size={16} />
+                {lang === "en" ? "Français" : "English"}
+              </button>
+
+              {user ? (
+                <button
+                  onClick={() => { signOut(); setOpen(false); }}
+                  className="mt-2 px-4 py-2 rounded-lg bg-muted text-foreground text-sm font-semibold text-center"
+                >
+                  {t("nav.signout")}
+                </button>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="mt-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold text-center"
+                >
+                  {t("nav.signin")}
+                </Link>
+              )}
             </div>
           </motion.div>
         )}
