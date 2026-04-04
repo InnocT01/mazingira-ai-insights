@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Satellite, Brain, Database, Shield, Globe, Leaf, BarChart3, MessageSquare } from "lucide-react";
+import { ArrowRight, Satellite, Brain, Database, Shield, Globe, Leaf, BarChart3, MessageSquare, AlertTriangle, FileText, History, ScanLine, CloudRain, Sprout, Users, Droplets, Map, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroBg from "@/assets/hero-bg-mazingira.png";
 import Navbar from "@/components/Navbar";
