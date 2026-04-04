@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Satellite, Brain, Database, Shield, Globe, Leaf, BarChart3, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroBg from "@/assets/hero-bg.jpg";
+import heroBg from "@/assets/hero-bg-mazingira.png";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
