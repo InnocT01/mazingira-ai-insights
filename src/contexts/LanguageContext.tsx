@@ -21,6 +21,7 @@ const translations: Record<string, Record<Lang, string>> = {
   "hero.subtitle": { en: "An AI-powered platform combining open-source environmental data with premium analytics for agriculture and climate resilience across Africa.", fr: "Une plateforme alimentée par l'IA combinant des données environnementales open-source avec des analyses premium pour l'agriculture et la résilience climatique en Afrique." },
   "hero.cta1": { en: "Explore Open Data", fr: "Explorer les données" },
   "hero.cta2": { en: "Ask Mazingira AI", fr: "Demander à Mazingira IA" },
+  "hero.trust": { en: "Trusted by researchers, farmers & NGOs across DRC", fr: "Adopté par des chercheurs, agriculteurs et ONG à travers la RDC" },
 
   // Stats
   "stat.hectares": { en: "Hectares Monitored", fr: "Hectares Surveillés" },
@@ -33,6 +34,9 @@ const translations: Record<string, Record<Lang, string>> = {
   "features.title": { en: "Environmental intelligence, reimagined", fr: "L'intelligence environnementale, réinventée" },
   "features.subtitle": { en: "From satellite data to AI-driven insights — everything you need to understand and protect Africa's most vital ecosystems.", fr: "Des données satellites aux analyses pilotées par l'IA — tout pour comprendre et protéger les écosystèmes vitaux de l'Afrique." },
 
+  // Partners
+  "partners.title": { en: "Powered by world-class data sources", fr: "Alimenté par des sources de données de premier plan" },
+
   // Layers
   "layers.badge": { en: "Hybrid Platform", fr: "Plateforme Hybride" },
   "layers.title": { en: "Two layers, one mission", fr: "Deux couches, une mission" },
@@ -43,13 +47,13 @@ const translations: Record<string, Record<Lang, string>> = {
 
   // CTA
   "cta.title": { en: "Ready to explore Africa's environmental data?", fr: "Prêt à explorer les données environnementales de l'Afrique ?" },
-  "cta.subtitle": { en: "Join thousands of researchers, farmers, and organizations using Mazingira Cloud to make data-driven decisions for a sustainable future.", fr: "Rejoignez des milliers de chercheurs, agriculteurs et organisations utilisant Mazingira Cloud." },
+  "cta.subtitle": { en: "Join researchers, farmers, and organizations using Mazingira Cloud to make data-driven decisions for a sustainable future.", fr: "Rejoignez des chercheurs, agriculteurs et organisations utilisant Mazingira Cloud." },
   "cta.button": { en: "Get Started Free", fr: "Commencer Gratuitement" },
   "cta.contact": { en: "Contact Us", fr: "Contactez-Nous" },
 
   // Dashboard
   "dashboard.badge": { en: "Open Data", fr: "Données Ouvertes" },
-  "dashboard.title": { en: "Public Dashboard", fr: "Tableau de Bord Public" },
+  "dashboard.title": { en: "Open Data Explorer", fr: "Explorateur de Données Ouvertes" },
   "dashboard.subtitle": { en: "Explore real-time environmental data across the Congo Basin.", fr: "Explorez les données environnementales en temps réel du Bassin du Congo." },
 
   // Footer

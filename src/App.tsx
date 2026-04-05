@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Explorer from "./pages/Explorer";
+import ContributePage from "./pages/ContributePage";
 import AIAssistant from "./pages/AIAssistant";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/explorer" element={<Explorer />} />
+              <Route path="/contribute" element={<ContributePage />} />
               <Route path="/ai" element={<AIAssistant />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
