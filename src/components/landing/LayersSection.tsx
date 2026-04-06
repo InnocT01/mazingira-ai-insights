@@ -38,7 +38,7 @@ const LayersSection = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/dashboard" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-primary hover:underline">
+              <Link to="/open-data" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-primary hover:underline">
                 {t("hero.cta1")} <ArrowRight size={14} />
               </Link>
             </div>
