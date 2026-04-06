@@ -38,7 +38,7 @@ const LayersSection = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/dashboard" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-primary hover:underline">
+              <Link to="/open-data" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-primary hover:underline">
                 {t("hero.cta1")} <ArrowRight size={14} />
               </Link>
             </div>
@@ -54,15 +54,15 @@ const LayersSection = () => {
               <h3 className="font-display text-xl font-bold">{t("layers.premium.title")}</h3>
               <p className="mt-3 text-primary-foreground/70 text-sm leading-relaxed">{t("layers.premium.desc")}</p>
               <ul className="mt-4 space-y-2">
-                {["AI soil & crop analysis", "Yield forecasting", "Custom PDF reports", "Personalized recommendations"].map((item) => (
+                {["Register your farms", "AI soil scanning", "Crop recommendations", "Climate alerts for your land"].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-primary-foreground/90">
                     <Leaf size={14} className="text-earth-sun shrink-0" />
                     {item}
                   </li>
                 ))}
               </ul>
-              <Link to="/premium" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-earth-sun hover:underline">
-                {t("layers.premium.title")} <ArrowRight size={14} />
+              <Link to="/login" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-earth-sun hover:underline">
+                {t("nav.signin")} <ArrowRight size={14} />
               </Link>
             </div>
           </motion.div>

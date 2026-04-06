@@ -14,12 +14,11 @@ const Navbar = () => {
 
   const navLinks = [
     { to: "/", label: t("nav.home") },
-    { to: "/dashboard", label: t("nav.opendata") },
-    { to: "/explorer", label: t("nav.explorer") },
+    { to: "/open-data", label: t("nav.opendata") },
     { to: "/ai", label: t("nav.ai") },
     { to: "/about", label: t("nav.about") },
     { to: "/contact", label: t("nav.contact") },
-    ...(user ? [{ to: "/premium", label: t("nav.premium") }] : []),
+    ...(user ? [{ to: "/dashboard", label: t("nav.dashboard") }] : []),
   ];
 
   return (
@@ -47,7 +46,6 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Language Toggle */}
           <button
             onClick={() => setLang(lang === "en" ? "fr" : "en")}
             className="ml-1 px-2 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex items-center gap-1"
@@ -74,59 +72,30 @@ const Navbar = () => {
           )}
         </div>
 
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden p-2 text-foreground"
-        >
+        <button onClick={() => setOpen(!open)} className="md:hidden p-2 text-foreground">
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-border bg-background"
-          >
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="md:hidden border-b border-border bg-background">
             <div className="container py-4 flex flex-col gap-1">
               {navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  onClick={() => setOpen(false)}
-                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                    location.pathname === link.to
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
+                <Link key={link.to} to={link.to} onClick={() => setOpen(false)} className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${location.pathname === link.to ? "text-primary bg-primary/10" : "text-muted-foreground hover:text-foreground"}`}>
                   {link.label}
                 </Link>
               ))}
-
-              <button
-                onClick={() => { setLang(lang === "en" ? "fr" : "en"); }}
-                className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground flex items-center gap-1"
-              >
+              <button onClick={() => setLang(lang === "en" ? "fr" : "en")} className="px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground flex items-center gap-1">
                 <Globe size={16} />
                 {lang === "en" ? "Français" : "English"}
               </button>
-
               {user ? (
-                <button
-                  onClick={() => { signOut(); setOpen(false); }}
-                  className="mt-2 px-4 py-2 rounded-lg bg-muted text-foreground text-sm font-semibold text-center"
-                >
+                <button onClick={() => { signOut(); setOpen(false); }} className="mt-2 px-4 py-2 rounded-lg bg-muted text-foreground text-sm font-semibold text-center">
                   {t("nav.signout")}
                 </button>
               ) : (
-                <Link
-                  to="/login"
-                  onClick={() => setOpen(false)}
-                  className="mt-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold text-center"
-                >
+                <Link to="/login" onClick={() => setOpen(false)} className="mt-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold text-center">
                   {t("nav.signin")}
                 </Link>
               )}

@@ -7,14 +7,14 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
-import Dashboard from "./pages/Dashboard";
-import Explorer from "./pages/Explorer";
+import OpenData from "./pages/OpenData";
 import ContributePage from "./pages/ContributePage";
 import AIAssistant from "./pages/AIAssistant";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
-import PremiumDashboard from "./pages/PremiumDashboard";
+import FarmerDashboard from "./pages/FarmerDashboard";
+import ResearcherDashboard from "./pages/ResearcherDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,14 +29,17 @@ const App = () => (
           <AuthProvider>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/explorer" element={<Explorer />} />
+              <Route path="/open-data" element={<OpenData />} />
               <Route path="/contribute" element={<ContributePage />} />
               <Route path="/ai" element={<AIAssistant />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/premium" element={<ProtectedRoute><PremiumDashboard /></ProtectedRoute>} />
+              <Route path="/dashboard" element={<ProtectedRoute><FarmerDashboard /></ProtectedRoute>} />
+              <Route path="/researcher" element={<ProtectedRoute><ResearcherDashboard /></ProtectedRoute>} />
+              {/* Legacy redirects */}
+              <Route path="/explorer" element={<OpenData />} />
+              <Route path="/premium" element={<ProtectedRoute><FarmerDashboard /></ProtectedRoute>} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AuthProvider>

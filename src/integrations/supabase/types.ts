@@ -14,7 +14,191 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      contributions: {
+        Row: {
+          created_at: string
+          data_type: string
+          description: string | null
+          download_count: number | null
+          file_url: string | null
+          format: string | null
+          id: string
+          latitude: number | null
+          longitude: number | null
+          metadata: Json | null
+          region: string | null
+          review_notes: string | null
+          status: Database["public"]["Enums"]["contribution_status"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          data_type?: string
+          description?: string | null
+          download_count?: number | null
+          file_url?: string | null
+          format?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          metadata?: Json | null
+          region?: string | null
+          review_notes?: string | null
+          status?: Database["public"]["Enums"]["contribution_status"]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          data_type?: string
+          description?: string | null
+          download_count?: number | null
+          file_url?: string | null
+          format?: string | null
+          id?: string
+          latitude?: number | null
+          longitude?: number | null
+          metadata?: Json | null
+          region?: string | null
+          review_notes?: string | null
+          status?: Database["public"]["Enums"]["contribution_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      farms: {
+        Row: {
+          area_hectares: number | null
+          created_at: string
+          crop_type: string | null
+          description: string | null
+          id: string
+          latitude: number | null
+          location: string | null
+          longitude: number | null
+          name: string
+          soil_type: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          area_hectares?: number | null
+          created_at?: string
+          crop_type?: string | null
+          description?: string | null
+          id?: string
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
+          name: string
+          soil_type?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          area_hectares?: number | null
+          created_at?: string
+          crop_type?: string | null
+          description?: string | null
+          id?: string
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
+          name?: string
+          soil_type?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          organization_name: string | null
+          phone: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          organization_name?: string | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          organization_name?: string | null
+          phone?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      soil_scans: {
+        Row: {
+          created_at: string
+          farm_id: string | null
+          id: string
+          notes: string | null
+          results: Json | null
+          scan_type: string
+          status: Database["public"]["Enums"]["scan_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          farm_id?: string | null
+          id?: string
+          notes?: string | null
+          results?: Json | null
+          scan_type?: string
+          status?: Database["public"]["Enums"]["scan_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          farm_id?: string | null
+          id?: string
+          notes?: string | null
+          results?: Json | null
+          scan_type?: string
+          status?: Database["public"]["Enums"]["scan_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "soil_scans_farm_id_fkey"
+            columns: ["farm_id"]
+            isOneToOne: false
+            referencedRelation: "farms"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +207,9 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      contribution_status: "pending" | "under_review" | "approved" | "rejected"
+      scan_status: "pending" | "completed" | "failed"
+      user_role: "farmer" | "researcher" | "organization"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +336,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      contribution_status: ["pending", "under_review", "approved", "rejected"],
+      scan_status: ["pending", "completed", "failed"],
+      user_role: ["farmer", "researcher", "organization"],
+    },
   },
 } as const
