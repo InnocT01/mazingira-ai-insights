@@ -53,7 +53,7 @@ const HeroSection = () => {
             className="mt-8 flex flex-col sm:flex-row gap-3"
           >
             <Link
-              to="/dashboard"
+              to="/open-data"
               className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:shadow-elevated transition-all duration-300 hover:scale-[1.02]"
             >
               {t("hero.cta1")} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />

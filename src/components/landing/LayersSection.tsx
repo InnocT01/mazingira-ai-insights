@@ -61,8 +61,8 @@ const LayersSection = () => {
                   </li>
                 ))}
               </ul>
-              <Link to="/premium" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-earth-sun hover:underline">
-                {t("layers.premium.title")} <ArrowRight size={14} />
+              <Link to="/login" className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-earth-sun hover:underline">
+                {t("nav.signin")} <ArrowRight size={14} />
               </Link>
             </div>
           </motion.div>
