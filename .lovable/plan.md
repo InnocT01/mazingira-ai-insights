@@ -1,31 +1,38 @@
-## Plan
 
-### 1. Enable Lovable Cloud
-- Activate backend for auth, database, AI assistant
-- Configure email auth **without email confirmation**
-- Set up user profiles table
+## Plan de restructuration Mazingira Cloud
 
-### 2. Change tagline
-- Update hero text to: "Regenerating the Congolese land/fields through climate and soil data intelligence"
+### 1. Fusion Dashboard + Explorer → "Mazingira Open Data"
+- Supprimer la page Dashboard séparée
+- Renommer Explorer en "Mazingira Open Data" (`/open-data`)
+- Structure: données satellites (NASA POWER, Copernicus) + contributions communautaires
+- Corriger le tagline: "Regenerating the Congolese land/fields through climate and soil data intelligence"
 
-### 3. Add interactive map (Congo)
-- Integrate Leaflet with OpenStreetMap on the Dashboard page
-- Center on DRC/North Kivu with satellite tile layer
+### 2. Intégration APIs données réelles
+- **Edge function `nasa-power`**: température, précipitations, humidité sol via NASA POWER API (gratuit, pas de clé)
+- **Edge function `copernicus`**: NDVI, couverture végétale via Copernicus Data Space (gratuit)
+- Affichage dans le tableau Open Data avec filtres par région DRC
 
-### 4. Build premium dashboard
-- Create a protected `/premium` route (login required)
-- Add charts (soil health, crop performance, climate risk)
-- Add cards for AI analysis results
+### 3. Deux parcours utilisateurs distincts
 
-### 5. Add French language toggle
-- Add FR/EN language switcher in navbar
-- Create i18n context with translations for key UI text
+#### A. Agriculteurs/Planteurs/Coopératives (clients)
+- Inscription/connexion standard
+- Upload et enregistrement de terrains (géolocalisation, superficie)
+- Scanner de sol: soumettre échantillon → diagnostic IA
+- Consulter données publiées dans leur région
+- Tables DB: `user_profiles`, `farms`, `soil_scans`
 
-### 6. Clean up & branding
-- Rewrite README.md for Mazingira Cloud
-- Remove Lovable references from source code
-- Add Facebook page button in footer and contact page
+#### B. Chercheurs/Experts (contributeurs)
+- Inscription/connexion avec rôle "researcher"
+- Formulaire de contribution type Ushahidi (données climat, sol, agriculture)
+- Dashboard de gestion de leurs contributions
+- Tables DB: `contributions`, `datasets`
 
-### Questions before proceeding:
-- For auth: Do you need user profiles (username, avatar, preferences)?
-- For the premium dashboard: Should it have mock data for now, or wait for real data sources?
+### 4. Migration DB
+- Table `profiles` (user_id, role: farmer|researcher|organization)
+- Table `farms` (user_id, name, location, area_hectares)
+- Table `soil_scans` (farm_id, user_id, results)
+- Table `contributions` (researcher_id, type, data, status: pending|approved)
+
+### 5. Mise à jour navigation
+- Remplacer Dashboard + Explorer par "Open Data" dans la navbar
+- Ajouter liens vers contribution et diagnostic sol
