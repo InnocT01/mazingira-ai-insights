@@ -1,38 +1,40 @@
+## Restructuration complète Mazingira Cloud
 
-## Plan de restructuration Mazingira Cloud
+### Structure inspirée MSN Météo (thème vert)
 
-### 1. Fusion Dashboard + Explorer → "Mazingira Open Data"
-- Supprimer la page Dashboard séparée
-- Renommer Explorer en "Mazingira Open Data" (`/open-data`)
-- Structure: données satellites (NASA POWER, Copernicus) + contributions communautaires
-- Corriger le tagline: "Regenerating the Congolese land/fields through climate and soil data intelligence"
+**Layout principal :**
+- **Sidebar gauche** : Navigation verticale (Actuel, Données Sol, Données Climat, Cartes, Tendances, AI Assistant, Mazingira Media)
+- **Zone centrale** : Données en temps réel pour la localisation sélectionnée
+- **Barre de recherche** : Rechercher un emplacement au Congo
 
-### 2. Intégration APIs données réelles
-- **Edge function `nasa-power`**: température, précipitations, humidité sol via NASA POWER API (gratuit, pas de clé)
-- **Edge function `copernicus`**: NDVI, couverture végétale via Copernicus Data Space (gratuit)
-- Affichage dans le tableau Open Data avec filtres par région DRC
+**Page principale (Dashboard Data) :**
+1. **En-tête** : Recherche localisation + sélecteur région
+2. **Carte conditions actuelles** : Température, humidité, précipitations, qualité du sol (style MSN)
+3. **Mini carte** : Carte interactive de la région avec données
+4. **Alertes** : Alertes climatiques/agricoles en temps réel
+5. **Onglets horizontaux** : Vue d'ensemble | Précipitations | Sol | Humidité | NDVI | UV
+6. **Prévisions jours** : Cartes horizontales scrollables (7 jours)
+7. **Graphique horaire** : Comme MSN mais pour données agricoles
 
-### 3. Deux parcours utilisateurs distincts
+**Pages/Sections :**
+- `/` — Dashboard data principal (style MSN)
+- `/cartes` — Cartes interactives
+- `/tendances` — Tendances mensuelles/annuelles
+- `/ai` — AI Assistant Mazingira
+- `/media` — Blog/Articles Mazingira Media
+- `/login` — Authentification
+- `/farmer` — Tableau de bord agriculteur (terrains, scans, labo)
+- `/researcher` — Tableau de bord chercheur (contribution données)
 
-#### A. Agriculteurs/Planteurs/Coopératives (clients)
-- Inscription/connexion standard
-- Upload et enregistrement de terrains (géolocalisation, superficie)
-- Scanner de sol: soumettre échantillon → diagnostic IA
-- Consulter données publiées dans leur région
-- Tables DB: `user_profiles`, `farms`, `soil_scans`
+**Différences avec MSN :**
+- Données agricoles/sol au lieu de météo pure
+- AI Assistant intégré
+- Mazingira Media (blog)
+- Contribution participative chercheurs
+- Scan sol + service labo pour agriculteurs
+- Thème vert (nature/agriculture)
 
-#### B. Chercheurs/Experts (contributeurs)
-- Inscription/connexion avec rôle "researcher"
-- Formulaire de contribution type Ushahidi (données climat, sol, agriculture)
-- Dashboard de gestion de leurs contributions
-- Tables DB: `contributions`, `datasets`
-
-### 4. Migration DB
-- Table `profiles` (user_id, role: farmer|researcher|organization)
-- Table `farms` (user_id, name, location, area_hectares)
-- Table `soil_scans` (farm_id, user_id, results)
-- Table `contributions` (researcher_id, type, data, status: pending|approved)
-
-### 5. Mise à jour navigation
-- Remplacer Dashboard + Explorer par "Open Data" dans la navbar
-- Ajouter liens vers contribution et diagnostic sol
+**Auth & Rôles :**
+- Agriculteurs : gérer terrains, scanner sol, demander labo
+- Chercheurs : contribuer données, gérer publications
+- Public : accès lecture données gratuitement
