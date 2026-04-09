@@ -5,7 +5,6 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-// NASA POWER API - free, no key needed
 const NASA_POWER_BASE = "https://power.larc.nasa.gov/api/temporal/daily/point";
 
 serve(async (req) => {
@@ -14,15 +13,27 @@ serve(async (req) => {
   }
 
   try {
-    const { latitude, longitude, parameters, startDate, endDate } = await req.json();
+    let latitude = -1.68;
+    let longitude = 29.22;
+    let parameters = "T2M,PRECTOTCORR,RH2M,WS2M,ALLSKY_SFC_SW_DWN";
+    let startDate = getDateDaysAgo(30);
+    let endDate = getDateDaysAgo(1);
 
-    const lat = latitude || -1.68; // Default: Goma
-    const lon = longitude || 29.22;
-    const params = parameters || "T2M,PRECTOTCORR,RH2M,WS2M,ALLSKY_SFC_SW_DWN";
-    const start = startDate || getDateDaysAgo(30);
-    const end = endDate || getDateDaysAgo(1);
+    // Parse body only for POST requests
+    if (req.method === "POST") {
+      try {
+        const body = await req.json();
+        if (body.latitude) latitude = body.latitude;
+        if (body.longitude) longitude = body.longitude;
+        if (body.parameters) parameters = body.parameters;
+        if (body.startDate) startDate = body.startDate;
+        if (body.endDate) endDate = body.endDate;
+      } catch {
+        // Empty body is fine, use defaults
+      }
+    }
 
-    const nasaUrl = `${NASA_POWER_BASE}?parameters=${params}&community=AG&longitude=${lon}&latitude=${lat}&start=${start}&end=${end}&format=JSON`;
+    const nasaUrl = `${NASA_POWER_BASE}?parameters=${parameters}&community=AG&longitude=${longitude}&latitude=${latitude}&start=${startDate}&end=${endDate}&format=JSON`;
     
     console.log("Fetching NASA POWER:", nasaUrl);
     
@@ -35,7 +46,6 @@ serve(async (req) => {
 
     const data = await response.json();
     
-    // Transform into clean format
     const properties = data.properties?.parameter || {};
     const dates = Object.keys(properties.T2M || {});
     
@@ -48,9 +58,27 @@ serve(async (req) => {
       solar_radiation: properties.ALLSKY_SFC_SW_DWN?.[date] ?? null,
     })).filter(d => d.temperature !== -999 && d.temperature !== null);
 
+    // Compute summary stats
+    const temps = transformed.map(d => d.temperature).filter(Boolean) as number[];
+    const precips = transformed.map(d => d.precipitation).filter(Boolean) as number[];
+    const humids = transformed.map(d => d.humidity).filter(Boolean) as number[];
+    const winds = transformed.map(d => d.wind_speed).filter(Boolean) as number[];
+
+    const avg = (arr: number[]) => arr.length ? arr.reduce((a, b) => a + b, 0) / arr.length : 0;
+
     return new Response(JSON.stringify({
-      location: { latitude: lat, longitude: lon },
-      period: { start, end },
+      ok: true,
+      location: { latitude, longitude },
+      period: { start: startDate, end: endDate },
+      summary: {
+        current_temp: temps[temps.length - 1] ?? null,
+        avg_temp: Math.round(avg(temps) * 10) / 10,
+        max_temp: Math.max(...temps),
+        min_temp: Math.min(...temps),
+        total_precip: Math.round(precips.reduce((a, b) => a + b, 0) * 10) / 10,
+        avg_humidity: Math.round(avg(humids) * 10) / 10,
+        avg_wind: Math.round(avg(winds) * 10) / 10,
+      },
       data: transformed,
       source: "NASA POWER",
     }), {
@@ -59,8 +87,8 @@ serve(async (req) => {
   } catch (e) {
     console.error("climate-data error:", e);
     return new Response(
-      JSON.stringify({ error: e instanceof Error ? e.message : "Unknown error" }),
-      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      JSON.stringify({ ok: false, error: e instanceof Error ? e.message : "Unknown error" }),
+      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
