@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import FarmerDashboard from "./pages/FarmerDashboard";
 import ResearcherDashboard from "./pages/ResearcherDashboard";
 import MazingiraMedia from "./pages/MazingiraMedia";
+import CreateArticle from "./pages/CreateArticle";
 import Maps from "./pages/Maps";
 import Trends from "./pages/Trends";
 import NotFound from "./pages/NotFound";
@@ -39,6 +40,7 @@ const App = () => (
                 <Route path="/trends" element={<Trends />} />
                 <Route path="/ai" element={<AIAssistant />} />
                 <Route path="/media" element={<MazingiraMedia />} />
+                <Route path="/media/new" element={<ProtectedRoute><CreateArticle /></ProtectedRoute>} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><FarmerDashboard /></ProtectedRoute>} />
