@@ -4,7 +4,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
-import { ArrowLeft, Send, Share2, Facebook, Twitter, Linkedin, Link2, Check } from "lucide-react";
+import { ArrowLeft, Send, Share2, Link2, Check } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const categories = [

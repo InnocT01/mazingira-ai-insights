@@ -16,6 +16,7 @@ import Login from "./pages/Login";
 import FarmerDashboard from "./pages/FarmerDashboard";
 import ResearcherDashboard from "./pages/ResearcherDashboard";
 import MazingiraMedia from "./pages/MazingiraMedia";
+import CreateArticle from "./pages/CreateArticle";
 import Maps from "./pages/Maps";
 import Trends from "./pages/Trends";
 import NotFound from "./pages/NotFound";

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Calendar, User, ArrowRight, PenLine, Share2, Facebook, Twitter, Linkedin, Link2, Check } from "lucide-react";
+import { Calendar, User, ArrowRight, PenLine, Share2, Link2, Check } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
