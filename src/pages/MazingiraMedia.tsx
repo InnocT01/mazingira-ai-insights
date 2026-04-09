@@ -99,8 +99,8 @@ const MazingiraMedia = () => {
               <div className="flex items-center gap-1 text-xs text-muted-foreground"><Calendar size={12} />{new Date(featured.created_at).toLocaleDateString("fr-FR")}</div>
             </div>
             <div className="flex items-center gap-1">
-              <button onClick={() => shareArticle(featured.id, featured.title, "facebook")} className="p-1.5 rounded-lg hover:bg-muted transition-colors"><Facebook size={14} className="text-muted-foreground" /></button>
-              <button onClick={() => shareArticle(featured.id, featured.title, "twitter")} className="p-1.5 rounded-lg hover:bg-muted transition-colors"><Twitter size={14} className="text-muted-foreground" /></button>
+              <button onClick={() => shareArticle(featured.id, featured.title, "facebook")} className="p-1.5 rounded-lg hover:bg-muted transition-colors">🔵</button>
+              <button onClick={() => shareArticle(featured.id, featured.title, "twitter")} className="p-1.5 rounded-lg hover:bg-muted transition-colors">🐦</button>
               <button onClick={() => shareArticle(featured.id, featured.title, "whatsapp")} className="p-1.5 rounded-lg hover:bg-muted transition-colors text-muted-foreground text-xs">📱</button>
               <button onClick={() => copyLink(featured.id)} className="p-1.5 rounded-lg hover:bg-muted transition-colors">
                 {copiedId === featured.id ? <Check size={14} className="text-primary" /> : <Link2 size={14} className="text-muted-foreground" />}

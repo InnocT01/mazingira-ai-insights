@@ -194,13 +194,13 @@ const CreateArticle = () => {
               </div>
               <div className="flex flex-wrap gap-3">
                 <button onClick={() => shareOnSocial("facebook")} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1877F2] text-white text-sm font-medium hover:opacity-90 transition-opacity">
-                  <Facebook size={16} /> Facebook
+                  🔵 Facebook
                 </button>
                 <button onClick={() => shareOnSocial("twitter")} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#1DA1F2] text-white text-sm font-medium hover:opacity-90 transition-opacity">
-                  <Twitter size={16} /> Twitter
+                  🐦 Twitter
                 </button>
                 <button onClick={() => shareOnSocial("linkedin")} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0A66C2] text-white text-sm font-medium hover:opacity-90 transition-opacity">
-                  <Linkedin size={16} /> LinkedIn
+                  🔗 LinkedIn
                 </button>
                 <button onClick={() => shareOnSocial("whatsapp")} className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366] text-white text-sm font-medium hover:opacity-90 transition-opacity">
                   📱 WhatsApp
