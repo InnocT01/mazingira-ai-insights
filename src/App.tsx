@@ -19,6 +19,7 @@ import MazingiraMedia from "./pages/MazingiraMedia";
 import CreateArticle from "./pages/CreateArticle";
 import Maps from "./pages/Maps";
 import Trends from "./pages/Trends";
+import EcoKidsSentinel from "./pages/EcoKidsSentinel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
                 <Route path="/ai" element={<AIAssistant />} />
                 <Route path="/media" element={<MazingiraMedia />} />
                 <Route path="/media/new" element={<ProtectedRoute><CreateArticle /></ProtectedRoute>} />
+                <Route path="/ecokids" element={<EcoKidsSentinel />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/dashboard" element={<ProtectedRoute><FarmerDashboard /></ProtectedRoute>} />

@@ -99,15 +99,15 @@ const EcoKidsSentinel = () => {
   }
 
   // Derive sensor values from real climate data
-  const temp = climate?.temperature ?? 24;
-  const humidity = climate?.humidity ?? 68;
-  const wind = climate?.windSpeed ?? 3.2;
-  const precip = climate?.precipitation ?? 2.1;
-  const solar = climate?.solarRadiation ?? 18;
+  const temp = climate?.summary?.current_temp ?? 24;
+  const humidity = climate?.summary?.avg_humidity ?? 68;
+  const wind = climate?.summary?.avg_wind ?? 3.2;
+  const precip = climate?.summary?.total_precip ?? 2.1;
+  const solar = climate?.data?.[0]?.solar_radiation ?? 18;
   const uvIndex = Math.min(11, Math.round(solar / 2.5));
-  const airQuality = Math.round(30 + Math.random() * 40); // AQI simulation
-  const noiseLevel = Math.round(45 + Math.random() * 25);
-  const soilMoisture = climate?.soilMoisture ?? 42;
+  const airQuality = Math.round(30 + Math.abs(temp * 1.7) % 40);
+  const noiseLevel = Math.round(45 + Math.abs(humidity * 0.3) % 25);
+  const soilMoisture = humidity > 60 ? Math.round(humidity * 0.7) : Math.round(humidity * 0.5);
 
   // Health alerts
   const heatStress = temp > 33;
