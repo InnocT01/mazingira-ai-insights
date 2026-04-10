@@ -1,6 +1,6 @@
 import {
   Sun, CloudRain, Map, TrendingUp, Bot, Newspaper,
-  Info, Mail, Leaf, FlaskConical, LogIn
+  Info, Mail, Leaf, FlaskConical, LogIn, Radio
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
@@ -35,6 +35,7 @@ const AppSidebar = () => {
     { title: t("nav.trends"), url: "/trends", icon: TrendingUp },
     { title: t("nav.ai"), url: "/ai", icon: Bot },
     { title: t("nav.media"), url: "/media", icon: Newspaper },
+    { title: "EcoKids Sentinel", url: "/ecokids", icon: Radio },
   ];
 
   const accountNav = user
