@@ -1,15 +1,27 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Globe, Search, LogOut } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { Globe, Search, LogOut, ChevronDown } from "lucide-react";
+import { useLanguage, langNames, langFlags, type Lang } from "@/contexts/LanguageContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+const languages: Lang[] = ["fr", "en", "sw", "ln", "wo", "zu"];
 
 const TopBar = () => {
   const { lang, setLang, t } = useLanguage();
   const { user, signOut } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
+  const [langOpen, setLangOpen] = useState(false);
   const navigate = useNavigate();
+  const langRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(e.target as Node)) setLangOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
     <header className="h-14 flex items-center border-b border-border bg-background px-3 gap-3 shrink-0">
@@ -29,13 +41,35 @@ const TopBar = () => {
       </div>
 
       <div className="flex items-center gap-2">
-        <button
-          onClick={() => setLang(lang === "en" ? "fr" : "en")}
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-        >
-          <Globe size={14} />
-          {lang === "en" ? "FR" : "EN"}
-        </button>
+        {/* Language selector dropdown */}
+        <div className="relative" ref={langRef}>
+          <button
+            onClick={() => setLangOpen(!langOpen)}
+            className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+          >
+            <Globe size={14} />
+            <span>{langFlags[lang]} {lang.toUpperCase()}</span>
+            <ChevronDown size={12} />
+          </button>
+          {langOpen && (
+            <div className="absolute right-0 top-full mt-1 w-44 rounded-xl bg-card border border-border shadow-lg z-50 py-1 animate-in fade-in slide-in-from-top-2 duration-150">
+              {languages.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => { setLang(l); setLangOpen(false); }}
+                  className={`w-full flex items-center gap-2 px-3 py-2 text-xs transition-colors ${
+                    l === lang
+                      ? "bg-primary/10 text-primary font-semibold"
+                      : "text-foreground hover:bg-muted"
+                  }`}
+                >
+                  <span className="text-sm">{langFlags[l]}</span>
+                  <span>{langNames[l]}</span>
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
         {user ? (
           <button
@@ -43,7 +77,7 @@ const TopBar = () => {
             className="flex items-center gap-1 px-2.5 py-1.5 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
           >
             <LogOut size={14} />
-            {!user ? "" : t("nav.signout")}
+            {t("nav.signout")}
           </button>
         ) : (
           <button
